@@ -1,0 +1,826 @@
+@import 'mixins/clear.less';
+#wrapper{
+    // 头部开始
+    #header{
+        // 上面部分
+        .headTop{
+            background-color: #eaeaea;
+            height: 30px;
+            // 版心元素
+            .headTopMain{
+                //版心居中
+                width: 1200px;  
+                margin: 0 auto;
+                line-height: 30px;
+                // 高度塌陷问题
+                // overflow: hidden;
+                .clearfix();
+                // 左侧
+                .left{
+                    h5{
+                        // 给h5和p标签都加一个浮动，它们才能在一条平行线上
+                        float: left;
+                        margin-right: 5px;
+                    }
+                    p{
+                        float: left;
+                        a{
+                            // 就是第一个a元素
+                            &:first-child{
+                                border-right: 1px solid #b3aeae;
+                                margin-right: 3px;
+                                padding-right: 5px;
+                            }
+                        }
+                    }
+                }
+                // 右侧
+                .right{
+                    /* 
+                        关于行内元素间有默认间隙的问题：
+                            1、将行内元素同一行显示，不换行（可读性差）
+                            2、将父元素font-size设置为0，记住要将下面元素的font-size再设置成原来大小，否则会消失
+                            3、在父元素上设置word-spacing的值为合适的负值
+                            4、将行内元素设置为浮动状态，不过这样做可能会有布局问题
+                    */
+                    // 行内元素间默认间隙，将父元素nav中的字体设置为0，但是a里面的字体会看不见，所以将a里面单独设置字体大小
+                    font-size: 0px;
+                    float: right;
+                    nav{
+                        a{
+                            // 单独设置
+                            font-size: 12px;
+                            // margin: 0 10px 0 10px;
+                            margin-left: 10px;
+                            // 为了让中间竖线在两个元素中间
+                            padding-right: 10px;
+                            border-right: 1px solid #b3aeae;
+                            &:last-child{
+                                // 去除最后一个竖线
+                                border:none;
+                            /*  margin-left: none;
+                                padding-right: none; */
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // 下面部分
+        .headBottom{
+            // 版心元素
+            .headBottomMain{
+                width: 1200px;
+                margin: 0 auto;
+                .clearfix();
+                // logo
+                .logo{
+                    a{
+                        img{
+                            width: 175px;
+                            height: 56px;
+                            margin: 25px 5px;
+                            // 如果不加向左浮动，则下面搜索框会被挤到下面
+                            float: left;
+                        }
+                    }
+                }
+                // 搜索框
+                .search{
+                    float: right;
+                    margin-top: 35px;
+                    input{
+                        // 文本框
+                        &:first-child{
+                            // 提交按钮
+                            box-sizing: border-box;
+                            width: 490px;
+                            height: 32px;
+                            padding: 0 4px;
+                            border: 3px solid gray;
+                            // 也要浮动，因为在同一行（搜索框和文本框）
+                            float: left;
+
+                        }
+                        &:last-child{
+                            width: 68px;
+                            height: 32px;
+                            color: #fff; 
+                            background:gray;
+                            border: none;   //本来有个边框颜色，none就单独消除了   
+                        }
+                        // 修饰placeholder
+                        /*   &::-webkit-input-placeholder{
+                            color: gray;
+                        } */
+                    }
+                }
+            }
+        }
+    }
+    // 头部结束
+
+    // 分类导航条开始
+    #navWrap{
+        border-bottom: 2px solid gray;
+        // 版心元素
+        .navWrapMain{
+            width: 1200px;
+            margin: 0 auto;  //水平居中
+            // 浮动之后，行元素变成块元素，会出现高度塌陷的问题
+            .clearfix();
+            a{
+                margin: 0 22px;
+                font-size: 16px;
+                color: #333;
+                float: left;
+                //垂直居中————行高与块元素的高度是一样的
+                line-height: 50px;  
+                &:first-child{
+                    width: 210px;
+                    height: 50px;
+                    background: gray;
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: bold;  //加粗
+                    text-align: center;
+                    line-height: 50px;
+                }
+            }
+        }
+    }
+    // 分类导航条结束
+
+    // 内容区域开始
+    #content{
+        // 版心元素
+        .contentMain{
+            width: 1200px;
+            margin: 15px auto 0 auto;
+            // 路径导航开始
+            .navPath{
+                padding: 9px 15px 9px 0;
+                font-size: 0px;
+                a{
+                    font-size: 12px;
+                }
+                i{
+                    font-size: 12px;
+                    padding: 0 5px;
+                }
+            }
+            // 路径导航结束
+
+            // 中间区域开始
+            #center{
+                margin: 5px 0 15px;
+                .clearfix();  //防止高度塌陷
+                // 左侧放大镜开始
+                #left{
+                    width: 400px;
+                    float: left;
+                    // 上面
+                    #leftTop{
+                        width: 400px;
+                        // 为了鼠标移入小图框中，让大图框元素在小图框右侧
+                        position: relative;
+                        // 小图框
+                        #smallPic{
+                            width: 400px;
+                            height: 400px;
+                            border: 1px solid #dfdfdf;
+                            // 为了让蒙版元素在小图框里面，所以它跟蒙版元素都要开启定位
+                            position: relative;
+                            img{}
+                            // 蒙版元素
+                            .mask{
+                                width: 200px;
+                                height: 200px;
+                                background: rgba(255, 255 , 255, .5);
+                                border: 1px solid #ddd;
+                                // 为了让蒙版元素在小图框里面
+                                position: absolute;
+                                left:0px;
+                                top:0px;
+                            }  
+                        }
+                        // 大图框
+                        #bigPic{
+                            width: 400px;
+                            height: 400px;
+                            border: 1px solid #ddd;
+                            // 既然有left和top，肯定是个定位元素
+                            left: 420px;
+                            top: 0px;
+                            // 为了鼠标移入小图框中，让大图框元素在小图框右侧
+                            position: absolute;
+
+                            // 如果不加上这个，则会出现大图片溢出大图框的情况
+                            overflow: hidden;
+                            // 大图片
+                            img{
+                                width: 800px;
+                                height: 800px;
+
+                                // 
+                                position: absolute;
+                                left: 0px;
+                                top: 0px;
+                            }
+                        }
+                    }
+
+                    // 下面
+                    #leftBottom{
+                        width: 400px;
+                        margin-top: 5px;
+                        // 左右箭头
+                        a{
+                            width: 10px;
+                            height: 54px;
+                            border: 1px solid #ccc;
+                            background: #ebebeb;
+                            text-align: center;
+                            line-height: 54px;
+                            // 让图片在同一水平线上
+                            float: left;
+                            &:first-child{
+                                margin-right: 4px;
+                            }
+                        }
+                        #piclist{
+                            width: 372px;
+                            height: 56px;
+                            // 让图片在同一水平线上
+                            float: left;
+                            // 一行中多余的要隐藏
+                            overflow: hidden;
+                            // 与子元素ul定位相对应的
+                            position: relative;
+                            ul{
+                                // 强制不换行！！！
+                                white-space: nowrap;
+                                // 加上定位才能点击箭头移动
+                                position: absolute;
+                                left: 0px;
+                                transition: 0.5s; 
+                                // 依旧是消灭默认小间隙
+                                font-size: 0px;
+                                li{
+                                    width: 50px;
+                                    height: 50px;
+                                    border: 1px solid #ccc;
+                                    padding: 2px;
+                                    margin-right: 20px;
+                                    // 行内块
+                                    display: inline-block;
+                                    img{
+                                        width: 50px;
+                                        height: 50px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // 左侧放大镜结束
+
+
+                .right{
+                    width: 700px;
+                    float: right;
+                    //商品详情区域开始
+                    .rightTop{
+                        h3{
+                            font-size: 14px;
+                            line-height: 21px;
+                            margin-top: 15px;
+                        }
+                        // > 属于直属元素,不加 > 会导致所有p标签的元素都改变
+                        > p{
+                            color:#e12228;
+                            margin-top: 15px;
+                        }
+                        .priceWrap{
+                            margin-top: 10px;
+                            line-height: 28px;
+                            background: #f2dcdf;
+                            padding: 7px;
+                            .priceTop{
+                                .clearfix();
+                                // 价格
+                                > span{
+                                    margin-right: 15px;
+                                    float: left;
+                                }
+                                // 中间
+                                .price{
+                                    float: left;
+                                    color: #cc1122;
+                                    > span{
+                                        font-size: 16px;
+                                        float: left;
+                                    }
+                                    p{
+                                        font-size: 24px;
+                                        float: left;
+                                        font-weight: bold;
+                                    }
+                                    i{
+                                        font-size: 12px;
+                                        color: #cc1122;
+                                        float: left;
+                                    }
+                                }
+                                // 累计评价
+                                > p{
+                                    float: right;
+                                    > span{
+    
+                                    }
+                                }
+                            }
+                            .priceBottom{
+                                .clearfix();
+                                // 促销
+                                > span{
+                                    float: left;
+                                    margin-right: 15px;
+                                }
+                                // 加价购
+                                p{
+                                    width: 520px;
+                                    line-height: 28px;
+                                    float: left;
+                                    > span{
+                                        color: #999;
+                                        // 加价购
+                                        &:first-child{
+                                            background:#c81623;
+                                            padding: 3px;
+                                            color: #fff;
+                                        }
+                                    }
+                                }
+                                
+                            }
+
+                        }
+
+                        .support{
+                            // border-bottom: 1px solid #ededed;
+                            // padding-bottom: 5px;
+                            margin-top: 10px;
+                            line-height: 28px;
+                            .clearfix();
+                            > span{
+                                margin-right: 15px;
+                                float: left;
+                            }
+                            > p{
+                                float: left;
+                                color: #999;
+                            }
+                        }
+
+                        .address{
+                            border-bottom: 1px solid #ededed;
+                            padding-bottom: 5px;
+                            margin-top: 10px;
+                            line-height: 28px;
+                            .clearfix();
+                            > span{
+                                margin-right: 15px;
+                                float: left;
+                            }
+                            > p{
+                                float: left;
+                                color: #999;
+                            }
+                        }
+
+                    }
+
+                    // 下面
+                    .rightBottom{
+                        margin-top: 10px;
+                        line-height: 28px;
+
+                        // 选择之后结果的区域开始
+                        .choose{
+                            .clearfix();
+                            .mark{
+                                height: 30px;
+                                background: snow;
+                                border: 1px solid #ddd;
+                                padding: 0 20px;
+                                margin-right: 20px;
+                                text-align: center;
+                                line-height: 30px;
+                                float: left;
+                                a{
+                                    color: red;
+                                    margin-left: 20px;
+                                }
+
+                            }
+                        }
+                        // 选择之后结果的区域结束
+
+
+                        // 商品参数的选择区域开始
+                        .chooseWrap{
+                            dl{
+                                margin-top: 13px;
+                                margin-bottom: 13px;
+                                dt{
+                                    margin-right: 15px;
+                                    float: left;
+                                }
+                                dd{
+                                    float: left;
+                                    margin-right: 5px;
+                                    color: #666;
+                                    line-height: 24px;
+                                    padding: 2px 14px;
+                                    border-top: 1px solid #eee;
+                                    border-left: 1px solid #eee;
+                                    border-right: 1px solid #bbb;
+                                    border-bottom: 1px solid #bbb;
+
+                                    &:first-of-type{
+                                        color: red;
+                                    }
+                                }
+                                .clearfix();  //第一个dl浮动之后，会影响后面的，所以在第一个dl浮动之后，要清除浮动
+                            }
+                        }
+                        // 商品参数的选择区域结束
+
+
+                        // 添加购物车区域开始
+                        .addCard{
+                            .clearfix();
+                            .count{
+                                width: 55px;
+                                margin-right: 15px;
+                                position: relative;
+                                float: left;
+                                input{
+                                    width: 38px;
+                                    height: 37px;
+                                    border: 1px solid #ddd;
+                                    color: #555;
+                                }
+                                a{
+                                    width: 15px;
+                                    height: 18px;
+                                    color: #666;
+                                    border: 1px solid #ddd;
+                                    background: #f1f1f1;
+                                    position: absolute;
+                                    right: 1px;
+                                    text-align: center;
+                                    line-height: 18px;
+
+                                    &:first-child{
+                                        top: 0px;
+                                    }
+
+                                    &:last-child{
+                                        top: 20px;
+                                        border-top: none;
+                                    }
+                                }
+                            }
+                            button{
+                                padding:0 25px 0 25px ;
+                                height: 36px;
+                                font-size: 16px;
+                                background: #e1251b;
+                                color: #ffff;
+                                border: none;
+                                float: left;
+                            }
+                        }
+                        // 添加购物车区域结束
+
+
+                    }
+                }
+                // 商品详情区域结束
+            }
+            // 中间区域结束
+
+            // 商品详情中间部分开始
+            .goodsDetailWrap{
+                width: 1200px;
+                margin: 30px auto 0;
+                .clearfix();
+                // 左边的侧边栏
+                .leftAside{
+                    width: 210px;
+                    // height: 1000px;
+                    border: 1px solid #ccc;
+                    .clearfix();
+                    float: left;
+
+                    // 上边
+                    .asideTop{
+                        // .clearfix();
+                        h4{
+                            width: 105px;
+                            height: 40px;
+                            background: #fff;
+                            float: left;
+                            text-align: center;
+                            line-height: 40px;
+                            border-bottom: 1px solid #ccc;
+                            border-top: 3px solid #fff;
+
+                            &.active{
+                                border-top: 3px solid #e1251b;
+                                border-bottom: none;
+                            }
+                        }
+                    }
+
+                    // 下边
+                    .aslideContent{
+                        padding: 10px;
+                        div{
+                            display: none;
+                            &.active{
+                                display: block;
+                                float: right;
+                                line-height: 28px;
+                                text-align: center;
+                                ul{
+                                    &.goodslist1{
+                                        li{
+                                            width: 50%;
+                                            border-bottom: 1px dashed #ededed ;
+                                            // line-height:28px;
+                                            float: left;
+                                        }
+                                    }
+                                    &.goodslist2{
+                                        margin: 5px 0 15px;
+                                        li{
+                                            border-bottom: 1px solid #fff;
+                                            img{
+                                                width: 152px;
+                                            }
+                                            span{}
+                                            p{
+                                                font-size: 16px;
+                                                color: #c81623;
+                                            }
+                                            .button{
+                                                margin: 5px 0 ;
+                                                text-align: center;
+                                         
+                                                
+                                                // div是块元素，a是行元素，所以需要将边框border的设置也挪下来
+                                                a{
+                                                    color: #8c8c8c;
+                                                    padding: 2px 14px;
+                                                    line-height: 18px;
+                                                    border: 1px solid #8c8c8c;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+
+                // 右侧的结构
+                .rightDetail{
+                    width: 980px;
+                    float: right;
+                    
+                    // 选择搭配开始
+                    .chooseBox{
+                        border: 1px solid #ddd;
+                        margin-bottom: 15px;
+                        // 标题
+                        h4{
+                            border-bottom: 1px solid #ddd;
+                            background: #f1f1f1; 
+                            color: #333;
+                            padding: 5px 0 5px 15px;
+                        }
+                        // 内容
+                        .listWrap{
+                            height: 170px;
+                            padding-top: 10px;
+                            // 左边
+                            .left{
+                                width: 127px;
+                                height: 165px;
+                                position: relative;
+                                float: left;
+                                text-align: center;
+
+                                img{
+                                    width: 87px;
+                                    margin: 0 auto;  //图片居中
+                                }
+                                p{
+                                    color: #c81623;
+                                    font-size: 16px;
+                                }
+                                i{
+                                    position: absolute;
+                                    top: 48px;
+                                    right: -25px;
+                                    font-size: 16px;
+                                }
+                            }
+                            // 中间
+                            .middle{
+                                width: 668px;
+                                height: 165px;
+                                float: left;
+                                text-align: center;
+                                li{
+                                    width: 127px;
+                                    margin: 0 20px;
+                                    float: left;
+                                    img{
+                                        width: 120px;
+                                        height: 130px;
+                                    }
+                                    // 因为下面有重复的span，所以加上 > 
+                                    > span{}
+                                    div{
+                                        input{}
+                                        span{}
+                                    }
+                                }
+                            }
+                            // 右侧
+                            .right{
+                                border-left: 1px solid #ddd;
+                                float: left;
+                                width: 153px;
+                                height: 165px;
+                                padding-left: 20px;
+                                div{
+                                    margin: 10px 0;
+                                }
+                                p{
+                                    font-weight: bold;
+                                    margin-bottom: 10px;
+                                }
+                                i{
+                                    color: #b1191a;
+                                    font-size: 16px;
+                                    margin-bottom: 10px;
+                                }
+                                button{
+                                    padding: 10px 25px;
+                                    font-size: 16px;
+                                    color: #fff;
+                                    background: #e1241b;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
+
+                    // 选项卡开始
+                    .bottomDetail{
+                        // 菜单
+                        .tabBtns{
+                            background: #ededed;
+                            .clearfix();
+                            li{
+                                border: 1px solid #ddd;
+                                background: #fff;
+                                // height: 40px;
+                                padding-left: 11px;
+                                padding-right: 11px;
+                                float: left;
+                                text-align: center;
+                                line-height: 40px;
+                                margin-left: -1px;   //解决边框重叠问题，可以挨个试一下哪一面的边框重叠了
+                                &.active{
+                                    background: red;
+                                    a{
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                        // 内容
+                        .tabContents{
+                            div{
+                                padding-left: 20px;
+                                line-height: 25px;
+                                display: none;  //如果不加，后面div的字都会在图片后面出现
+                                &.active{
+                                    margin:10px 0;
+                                    display: block;   //点击的时候才会出现
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // 商品详情中间部分结束
+        }
+    }
+    // 内容区域结束
+
+    // 右侧侧边栏开始
+    .rightAside{
+        width: 300px;
+        height: 100%;
+        background: #7a6e6e;
+        transition: 0.5s;
+        position: fixed;
+        top: 0px;
+        &.asideClose{
+            right: -294px;
+            // right: 0px;
+        }
+
+        &.asideOpen{
+            right: 0px;
+        }
+        // 按钮区域
+        .btns{
+            width: 35px;
+            height: 35px;
+            background: #7a6e6e;
+            border-radius: 5px 0 0 5px;
+            left: -29px;
+            background-size: 35px 35px;
+            position: absolute;
+            &.btnsClose{
+                background-image: url('../images/list.png');
+            }
+            &.btnsOpen{
+                background-image: url('../images/cross.png');
+            }
+        }
+
+        // 侧边栏内容区域
+        .content{
+            width: 294px;
+            background: bisque;
+            position: absolute;
+            left:6px;
+            top: 0px;
+            bottom: 0px;
+            // 面板的层级高
+            z-index: 50;
+        }
+        // 侧边导航
+        .navlist{
+            position: absolute;
+            left: -29px;
+            top: 50%;
+            transform: translateY(-50%);
+            li{
+                width: 35px;
+                height: 35px;
+                position: relative;
+                p{
+                    width: 35px;
+                    height: 35px;
+                    background: #7a6e6e;
+                    background-image: url('../images/toolbars.png');
+                    background-position: -87px -174px;
+                    transition: 0.5s;
+                }
+                i{
+                    width: 62px;
+                    height: 35px;
+                    text-align: center;
+                    line-height: 35px;
+                    position: absolute;
+                    left: 35px;
+                    transition: 0.5s;
+                    top: 0px;
+                    background:#7a6e6e;
+                }
+                &:hover{
+                    p{
+                        background-color: pink;
+                    }
+                    i{
+                        background-color: pink;
+                        left:-62px;
+                    }
+                }
+            }
+        } 
+    }
+    // 右侧侧边栏结束
+}
